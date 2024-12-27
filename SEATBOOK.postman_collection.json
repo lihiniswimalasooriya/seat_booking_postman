@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "7487cb69-6555-4c49-9e82-c2dbda49c588",
+		"name": "SEATBOOK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31894703"
+	},
+	"item": [
+		{
+			"name": "routes",
+			"item": [
+				{
+					"name": "add route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startPoint\": \"Matara\",\r\n  \"endPoint\": \"Colombo\",\r\n  \"distance\": 115,\r\n  \"estimatedTime\": \"3h 30m\",\r\n  \"fare\": 500\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}routes",
+							"host": [
+								"{{url}}routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}routes/6768358e75e751be261bbf74",
+							"host": [
+								"{{url}}routes"
+							],
+							"path": [
+								"6768358e75e751be261bbf74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startPoint\": \"Station A\",\r\n  \"endPoint\": \"Station C\",\r\n  \"distance\": 20,\r\n  \"estimatedTime\": \"30 minutes\",\r\n  \"fare\": 70\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}routes/676583141f582a5afbeb803c",
+							"host": [
+								"{{url}}routes"
+							],
+							"path": [
+								"676583141f582a5afbeb803c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}routes/676583141f582a5afbeb803c",
+							"host": [
+								"{{url}}routes"
+							],
+							"path": [
+								"676583141f582a5afbeb803c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all routes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}routes",
+							"host": [
+								"{{url}}routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by startPoint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}routes/filter?startPoint=Matara",
+							"host": [
+								"{{url}}routes"
+							],
+							"path": [
+								"filter"
+							],
+							"query": [
+								{
+									"key": "startPoint",
+									"value": "Matara"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John admin\",\r\n  \"email\": \"john.commuter@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"commuter\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/register",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Check if the access token is present in the response\r",
+									"if (jsonData.token) {\r",
+									"    // Set the access token in an environment variable\r",
+									"    pm.environment.set(\"token\", jsonData.token);\r",
+									"}\r",
+									"\r",
+									"// Optionally, log the new access token to the console for debugging\r",
+									"console.log(\"New token: \" + jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john.operator@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/login",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "buses",
+			"item": [
+				{
+					"name": "add bus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"busNumber\": \"A1234\",\r\n  \"operator\": \"676835ab75e751be261bbf77\",\r\n  \"route\": \"676af5685fc08e55ce1183c0\",\r\n  \"capacity\": 40\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}buses",
+							"host": [
+								"{{url}}buses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update bus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"busNumber\": \"B1234\",\r\n  \"operator\": \"67681877d5bfed935a05f37a\",\r\n  \"route\": \"6768192b4675998daaaa87a2\",\r\n  \"capacity\": 45\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}buses/676aeb96dbccac34ef334cd8",
+							"host": [
+								"{{url}}buses"
+							],
+							"path": [
+								"676aeb96dbccac34ef334cd8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete bus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}buses/676aeb96dbccac34ef334cd8",
+							"host": [
+								"{{url}}buses"
+							],
+							"path": [
+								"676aeb96dbccac34ef334cd8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}buses",
+							"host": [
+								"{{url}}buses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}buses/676aeb96dbccac34ef334cd8",
+							"host": [
+								"{{url}}buses"
+							],
+							"path": [
+								"676aeb96dbccac34ef334cd8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add defaultTrip",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"route\": \"676a357b7574a6c65c8c927e\",\r\n  \"bus\": \"676afd86dc0bb2b74773f4de\",\r\n  \"startTime\": \"12:00\",\r\n  \"arrivalTime\": \"2:00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}buses/defaultTrips",
+							"host": [
+								"{{url}}buses"
+							],
+							"path": [
+								"defaultTrips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDefaultTrip",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}buses/defaultTrips/676aef7c28470eaea975662d",
+							"host": [
+								"{{url}}buses"
+							],
+							"path": [
+								"defaultTrips",
+								"676aef7c28470eaea975662d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reservations",
+			"item": [
+				{
+					"name": "add reservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"busId\": \"676afd86dc0bb2b74773f4de\",          // Bus ID\r\n  \"defaultTripId\": \"676afdb5dc0bb2b74773f4e3\",  // Default Trip ID\r\n  \"date\": \"2024-12-25T10:00:00Z\",               // Trip date in ISO 8601 format\r\n  \"seatNumber\": 5                              // Seat number for reservation\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}reservations",
+							"host": [
+								"{{url}}reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update reservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"seatNumber\": 5,\r\n  \"paymentStatus\": \"completed\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}reservations/676af5f2f0b00fdfe76bd12a",
+							"host": [
+								"{{url}}reservations"
+							],
+							"path": [
+								"676af5f2f0b00fdfe76bd12a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}reservations/676af5f2f0b00fdfe76bd12a",
+							"host": [
+								"{{url}}reservations"
+							],
+							"path": [
+								"676af5f2f0b00fdfe76bd12a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}reservations",
+							"host": [
+								"{{url}}reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete reservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}reservations/676af5f2f0b00fdfe76bd12a",
+							"host": [
+								"{{url}}reservations"
+							],
+							"path": [
+								"676af5f2f0b00fdfe76bd12a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrCreateTripByDetails",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}reservations/trip?busId=676afd86dc0bb2b74773f4de&defaultTripId=676afdb5dc0bb2b74773f4e3&date=2024-12-25&routeId=676a357b7574a6c65c8c927e",
+							"host": [
+								"{{url}}reservations"
+							],
+							"path": [
+								"trip"
+							],
+							"query": [
+								{
+									"key": "busId",
+									"value": "676afd86dc0bb2b74773f4de"
+								},
+								{
+									"key": "defaultTripId",
+									"value": "676afdb5dc0bb2b74773f4e3"
+								},
+								{
+									"key": "date",
+									"value": "2024-12-25"
+								},
+								{
+									"key": "routeId",
+									"value": "676a357b7574a6c65c8c927e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
